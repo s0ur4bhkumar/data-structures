@@ -15,7 +15,7 @@ const linkedList = (value) => {
     prepend: (value) => {
       head = Node(value, head);
     },
-    size: () => {
+    size() {
       let count = 0;
       let current = head;
       while (current.nextNode !== null) {
@@ -77,6 +77,28 @@ const linkedList = (value) => {
       }
       previous.nextNode = element;
       element.nextNode = current;
+    },
+    removeAt(idx) {
+      let count = 0;
+      let current = head;
+      let previous;
+      if (idx === 0) {
+        head = head.nextNode;
+      } else if (idx === this.size() - 1) {
+        while (count < idx) {
+          [previous, current] = [current, current.nextNode];
+          count++;
+        }
+        previous.nextNode = null;
+      } else if (idx >= this.size()) {
+        throw "range Error";
+      } else {
+        while (count < idx) {
+          [previous, current] = [current, current.nextNode];
+          count++;
+        }
+        previous.nextNode = current.nextNode.nextNode;
+      }
     },
     toString: () => {
       let result = "";
