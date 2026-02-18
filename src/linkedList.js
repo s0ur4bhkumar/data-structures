@@ -16,13 +16,13 @@ const linkedList = (value) => {
       head = Node(value, head);
     },
     size: () => {
-      let count=0;
+      let count = 0;
       let current = head;
       while (current.nextNode !== null) {
         count++;
         current = current.nextNode;
       }
-      return count+1;
+      return count + 1;
     },
     Head: () => {
       return head.value;
@@ -66,6 +66,18 @@ const linkedList = (value) => {
       }
       return count;
     },
+    atIndex: (idx, val) => {
+      let count = 0;
+      let current = head;
+      let element = Node(val);
+      let previous;
+      while (count < idx) {
+        [previous, current] = [current, current.nextNode];
+        count++;
+      }
+      previous.nextNode = element;
+      element.nextNode = current;
+    },
     toString: () => {
       let result = "";
       let current = head;
@@ -90,4 +102,4 @@ const Node = (value = null, nextNode = null) => {
   };
 };
 
-export default linkedList
+export default linkedList;
