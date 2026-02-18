@@ -39,6 +39,7 @@ const linkedList = (value) => {
       let current = head;
       while (count < index) {
         count++;
+        current = current.nextNode
       }
       return current.value;
     },
