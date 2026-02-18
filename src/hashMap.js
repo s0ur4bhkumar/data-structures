@@ -3,7 +3,7 @@ import linkedList from "./linkedList.js";
 const hashMap = (load_factor = 0.75, capacity = 16) => {
   let arr = Array(capacity);
   return {
-    set: (key, val) => {
+    set(key, val) {
       let h = hash(key);
       if (arr[h] === undefined) {
         arr[h] = linkedList();
@@ -20,9 +20,9 @@ const hashMap = (load_factor = 0.75, capacity = 16) => {
       if (!found) {
         arr[h].append([key, val]);
       }
-      console.log(arr[h].toString());
+      this.growth();
     },
-    get: (key) => {
+    get(key) {
       let h = hash(key);
       let found = false;
       for (let i = 0; i < arr[h].size(); i++) {
@@ -37,7 +37,7 @@ const hashMap = (load_factor = 0.75, capacity = 16) => {
         return null;
       }
     },
-    remove: (key) => {
+    remove(key) {
       let h = hash(key);
       let found = false;
       for (let i = 0; i < arr[h].size(); i++) {
@@ -51,7 +51,7 @@ const hashMap = (load_factor = 0.75, capacity = 16) => {
       }
       return found;
     },
-    has: (key) => {
+    has(key) {
       let h = hash(key);
       for (let i = 0; i < arr[h].size(); i++) {
         if (arr[h].at(i)) {
@@ -62,7 +62,7 @@ const hashMap = (load_factor = 0.75, capacity = 16) => {
       }
       return false;
     },
-    length: () => {
+    length() {
       let count = 0;
       for (let i = 0; i < arr.length; i++) {
         if (arr[i] !== undefined) {
@@ -75,7 +75,7 @@ const hashMap = (load_factor = 0.75, capacity = 16) => {
       }
       return count;
     },
-    keys: () => {
+    keys() {
       let keys = [];
       for (let i = 0; i < arr.length; i++) {
         if (arr[i] !== undefined) {
@@ -86,7 +86,7 @@ const hashMap = (load_factor = 0.75, capacity = 16) => {
       }
       return keys;
     },
-    values: () => {
+    values() {
       let values = [];
       for (let i = 0; i < arr.length; i++) {
         if (arr[i] !== undefined) {
@@ -97,7 +97,7 @@ const hashMap = (load_factor = 0.75, capacity = 16) => {
       }
       return values;
     },
-    entries: () => {
+    entries() {
       let entries = [];
       for (let i = 0; i < arr.length; i++) {
         if (arr[i] !== undefined) {
@@ -108,8 +108,23 @@ const hashMap = (load_factor = 0.75, capacity = 16) => {
       }
       return entries;
     },
-    clear: () => {
+    clear() {
       return arr.splice(0, arr.length - 1);
+    },
+    growth() {
+      if (this.length() > Math.floor(capacity * load_factor)) {
+        arr.length += capacity;
+      }
+    },
+    hashLength() {
+      return arr.length;
+    },
+    lists() {
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] !== undefined) {
+          console.log(arr[i].toString());
+        }
+      }
     },
   };
 };
@@ -125,18 +140,21 @@ function hash(key) {
   return hashCode;
 }
 
-let map = hashMap();
+// const test = hashMap();
+// test.set("apple", "red");
+// test.set("banana", "yellow");
+// test.set("carrot", "orange");
+// test.set("dog", "brown");
+// test.set("elephant", "gray");
+// test.set("frog", "green");
+// test.set("grape", "purple");
+// test.set("hat", "black");
+// test.set("ice cream", "white");
+// test.set("jacket", "blue");
+// test.set("kite", "pink");
+// test.set("lion", "golden");
+// console.log('before: ',test.hashLength())
+// test.set("moon", "silver");
+// console.log('after: ',test.hashLength())
 
-map.set("a", 36);
-map.set("b", 36);
-map.set("sara", 36);
-map.set("rasa", 32);
-map.set("ab", 43);
-map.set('abc',54)
-map.keys();
-console.log(map.get('abc'))
-console.log(map.remove("abc"));
-console.log(map.has('abc'))
-console.log(map.length());
-console.log(map.values());
-console.log(map.entries());
+// test.lists();
