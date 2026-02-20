@@ -45,6 +45,40 @@ const bst = (arr) => {
       }
       return false;
     },
+    preorder: function preOrder(node = root) {
+      if (node === null) {
+        return;
+      }
+      console.log(node.data);
+      preOrder(node.left);
+      preOrder(node.right);
+    },
+    inorder: function inOrder(node = root) {
+      if (node === null) {
+        return;
+      }
+      inOrder(node.left);
+      console.log(node.data);
+      inOrder(node.right);
+    },
+    postorder: function postOrder(node = root) {
+      if (node === null) {
+        return;
+      }
+      postOrder(node.left);
+      postOrder(node.right);
+      console.log(node.data);
+    },
+    levelorder: function levelOrder(node = root) {
+      if (node === null) {
+        return 
+      }
+      console.log(node.data)
+      console.log(node.left.data)
+      console.log(node.right.data)
+      levelOrder(node.left)
+      levelOrder(node.right)
+    },
     insert(val) {
       let node = root;
       let previous;
@@ -95,7 +129,13 @@ console.log(
   "-----------------------------------------------operations------------------------------",
 );
 // console.log(root.max());
-root.delete(7);
-root.delete(15)
 root.prettyPrint();
+console.log("pre-order:");
+root.preorder();
+console.log("in-order: ");
+root.inorder();
+console.log('post-Order: ')
+root.postorder()
+console.log('level-Order: ')
+root.levelorder()
 // console.log(root.includes(10))
